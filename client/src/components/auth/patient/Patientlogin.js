@@ -37,7 +37,7 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function SignIn({setauth}) {
+export default function SignIn({setauth, local}) {
   console.log(setauth);
   const [open, setOpen] = React.useState(false);
   const [mess, setMess] = React.useState("");
@@ -64,7 +64,8 @@ export default function SignIn({setauth}) {
     setOpen(!open);
     setMess(respond.reason)
     if(respond.status){
-      setauth(true)
+      setauth(true);
+      local()
       redirect('/doctors')
     }
   };
