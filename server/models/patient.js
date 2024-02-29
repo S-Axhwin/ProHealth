@@ -32,5 +32,5 @@ const Patient = mongoose.model("patient", PatientSchema);
 
 module.exports = Patient
 
-
+//username, gender, password, number, email
 

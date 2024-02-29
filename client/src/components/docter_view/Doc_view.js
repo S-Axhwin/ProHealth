@@ -3,7 +3,7 @@ import DocCard from './DocCard'
 
 const Doc_view = () => {
   useEffect(async()=>{
-    fetch("")
+    
   })
   return (
     <div style={{display: 'flex', justifyContent: 'center'}}>

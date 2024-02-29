@@ -28,6 +28,17 @@ const Preg =  async(req, res)=>{
     res.send({status: false, reason: "user already exist"})
 }
 
+const Plogin = async (req, res)=>{
+    const {  password, email } = req.body;
+    const isExist = await patient.findOne({password, email});
+    if(isExist){
+        console.log(isExist);
+        res.json({status: true, reason: "logged in"})
+    }else{
+        res.json({status: false, reason: 'user doesn exist'})
+    }
+}
+
 const Dreg =  async(req, res)=>{
     //name, password, number, email
     console.log(req.body);
@@ -59,5 +70,6 @@ const Dreg =  async(req, res)=>{
 
 module.exports = {
     Preg,
-    Dreg
+    Dreg,
+    Plogin
 }

@@ -8,6 +8,14 @@ import Home from "./components/home/Home"
 import { Route, Routes } from 'react-router-dom'
 import Login from "./components/auth/patient/Patientlogin"
 
+const Booking = ()=>{
+  return <>booking</>
+}
+
+const Account = ()=>{
+  return <>account page</>
+}
+
 const App = () => {
   const [auth, setauth] = useState(false);
   return (
@@ -18,16 +26,17 @@ const App = () => {
           {auth?(
           <>
             <>
-            <Route path="/booking" element={<>booking</>} />
+            <Route path="/bookappointment" element={<Booking/>} />
             <Route path="/doctors" element={<Doc_view/>} />
-            <Route path="/account" element={<>account page</>} />
+            <Route path="/account" element={<Account/>} />
             </>
           </>
           ):(
             <>
             <Route path="/about" element={<About/>} />
-            <Route path="/login" element={<Login/>} />
+            <Route path="/login" element={<Login  setauth={setauth}/>}/>
             <Route path="/home" element={<Home/>} />
+            //about, login, home
             </>
           )
           }

@@ -12,7 +12,14 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import Snackbar from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import { redirect } from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -30,21 +37,38 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function SignIn() {
-
+export default function SignIn({setauth}) {
+  console.log(setauth);
+  const [open, setOpen] = React.useState(false);
+  const [mess, setMess] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [pass, setPass] = React.useState("");
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
+    const info = {
+      
       password: data.get('password'),
+      email: data.get('email'),
+    };
+    console.log(info);
+    //username, gender, password, number, email
+    const res = await fetch("http://localhost:5002/auth/patient/login", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(info)
     });
+    const respond = (await res.json());
+    setOpen(!open);
+    setMess(respond.reason)
+    if(respond.status){
+      setauth(true)
+      redirect('/doctors')
+    }
   };
-  function fetchApi(email, password){
-    console.log(email, password);
-  }
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
@@ -61,13 +85,14 @@ export default function SignIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Login
             
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
+            required
               margin="normal"
-              required
+              
               fullWidth
               id="email"
               type='email'
@@ -77,9 +102,10 @@ export default function SignIn() {
               autoFocus
               onChange={(e)=>setEmail(e.target.value)}
             />
+            
             <TextField
+            required
               margin="normal"
-              required
               fullWidth
               name="password"
               label="Password"
@@ -87,17 +113,14 @@ export default function SignIn() {
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+            
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              login
             </Button>
             <Grid container>
               <Grid item xs>
@@ -115,6 +138,12 @@ export default function SignIn() {
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
+      <Snackbar
+  open={open}
+  autoHideDuration={3000}
+  message={mess}
+  
+/>
     </ThemeProvider>
   );
 }

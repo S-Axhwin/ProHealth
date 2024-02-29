@@ -17,9 +17,12 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
-const navItems = ['bookappointment', 'doctors', 'account'];
+const navItemsAuth= ['bookappointment', 'doctors', 'account'];
+//about, login, home
+const navItems= ['home', 'login', 'about'];
 
 function DrawerAppBar(props) {
+  console.log(props.auth);
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -34,7 +37,7 @@ function DrawerAppBar(props) {
       </Typography>
       <Divider />
       <List>
-        {navItems.map((item) => (
+        {!props.auth?(navItems.map((item) => (
           <Link to={`/${item}`} >
           <ListItem key={item} disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
@@ -42,7 +45,15 @@ function DrawerAppBar(props) {
             </ListItemButton>
           </ListItem>
           </Link>
-        ))}
+        ))):(navItemsAuth.map((item) => (
+          <Link to={`/${item}`} >
+          <ListItem key={item} disablePadding>
+            <ListItemButton sx={{ textAlign: 'center' }}>
+              <ListItemText primary={item} />
+            </ListItemButton>
+          </ListItem>
+          </Link>
+        )))}
       </List>
     </Box>
   );
@@ -50,7 +61,7 @@ function DrawerAppBar(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', backgroundColor: 'red' }}>
       <CssBaseline />
       <AppBar component="nav">
         <Toolbar>
@@ -71,13 +82,19 @@ function DrawerAppBar(props) {
             MUI
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            {navItems.map((item) => (
+            {props.auth?(navItemsAuth.map((item) => (
               <Link to={`/${item}`} key={item}>
               <Button sx={{ color: '#fff' }}>
                 {item}
               </Button>
               </Link>
-            ))}
+            ))):navItems.map((item) =>{
+              return<Link to={`/${item}`} key={item}>
+              <Button sx={{ color: '#fff' }}>
+                {item}
+              </Button>
+              </Link>
+            })}
           </Box>
         </Toolbar>
       </AppBar>
