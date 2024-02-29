@@ -15,9 +15,22 @@ const App = () => {
         <Navbar auth={auth} />
         <div style={{marginTop: "7rem", height: "200vh"}}>
         <Routes>
-          <Route path="/login" element={<Login/>} />
-          <Route path="/home" element={<Home/>} />
-          <Route path="/about" element={<About/>} />
+          {auth?(
+          <>
+            <>
+            <Route path="/booking" element={<>booking</>} />
+            <Route path="/doctors" element={<Doc_view/>} />
+            <Route path="/account" element={<>account page</>} />
+            </>
+          </>
+          ):(
+            <>
+            <Route path="/about" element={<About/>} />
+            <Route path="/login" element={<Login/>} />
+            <Route path="/home" element={<Home/>} />
+            </>
+          )
+          }
         </Routes>
         </div>
         <Footer />
