@@ -13,6 +13,7 @@ const App = () => {
         <div style={{marginTop: "7rem", height: "200vh"}}>
         <Routes>
           <Route path="/login" element={<Login/>} />
+          
           <Route path="/home" element={<Home/>} />
           <Route path="/about" element={<About/>} />
         </Routes>
