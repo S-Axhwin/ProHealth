@@ -17,7 +17,7 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
-const navItems = ['home', 'about', 'contact'];
+const navItems = ['bookappointment', 'doctors', 'account'];
 
 function DrawerAppBar(props) {
   const { window } = props;
@@ -35,7 +35,7 @@ function DrawerAppBar(props) {
       <Divider />
       <List>
         {navItems.map((item) => (
-          <Link to={`/${item}` } >
+          <Link to={`/${item}`} >
           <ListItem key={item} disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
               <ListItemText primary={item} />

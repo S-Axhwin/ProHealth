@@ -28,10 +28,6 @@ const Preg =  async(req, res)=>{
     res.send({status: false, reason: "user already exist"})
 }
 
-module.exports = {
-    reg
-}
-
 const Dreg =  async(req, res)=>{
     //name, password, number, email
     console.log(req.body);

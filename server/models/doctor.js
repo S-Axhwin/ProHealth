@@ -30,5 +30,5 @@ const DoctorSchema ={
     
 }
 
-const Doctor = mongoose.model("docter",DocterSchema);
-module.exports = Docter;
+const Doctor = mongoose.model("docter",DoctorSchema);
+module.exports = Doctor;
