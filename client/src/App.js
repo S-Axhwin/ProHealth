@@ -9,7 +9,7 @@ import { Route, Routes } from 'react-router-dom'
 import Login from "./components/auth/patient/Patientlogin"
 
 const App = () => {
-  const [auth, setauth] = useState(true);
+  const [auth, setauth] = useState(false);
   return (
     <div style={{overflow: "hidden"}}>
         <Navbar auth={auth} />
